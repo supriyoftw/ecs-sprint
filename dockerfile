@@ -5,7 +5,7 @@ ADD fluent-bit.conf /fluent-bit/etc/
 ADD parsers.conf /fluent-bit/etc/
 
 # Expose ports (optional based on your application's requirements)
-EXPOSE 2020
+EXPOSE 24424
 #EXPOSE 80
 
 # Define volumes for logs and other data
