@@ -14,10 +14,10 @@ phases:
   build:
     commands:
       - echo Build started on `date`
-      - echo Building the Docker image...          
-      - docker build -t ecs-package-repository:latest -f dockerfile .
+      - echo Building the Docker image...
       - echo "Updating fluent-bit.conf with the OpenSearch host"
       - sed -i 's|\${OPENSEARCH_HOST}|'$OPENSEARCH_HOST'|g' fluent-bit.conf
+      - docker build -t ecs-package-repository:latest -f dockerfile .
       - docker tag ecs-package-repository:latest 785975698029.dkr.ecr.ap-south-1.amazonaws.com/ecs-package-repository:latest      
   post_build:
     commands:
