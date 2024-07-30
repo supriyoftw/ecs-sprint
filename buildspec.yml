@@ -1,5 +1,8 @@
 version: 0.2
 run-as: root
+env:
+  variables:
+    OPENSEARCH_HOST: "api"
 
 
 phases:
@@ -13,6 +16,8 @@ phases:
       - echo Build started on `date`
       - echo Building the Docker image...          
       - docker build -t ecs-package-repository:latest -f dockerfile .
+      - echo "Updating fluent-bit.conf with the OpenSearch host"
+      - sed -i 's|\${OPENSEARCH_HOST}|'$OPENSEARCH_HOST'|g' fluent-bit.conf
       - docker tag ecs-package-repository:latest 785975698029.dkr.ecr.ap-south-1.amazonaws.com/ecs-package-repository:latest      
   post_build:
     commands:
