@@ -17,6 +17,7 @@ phases:
       - echo Building the Docker image...
       - echo Replacing placeholder in fluent-bit.conf with FLUENTBIT_HOST=${FLUENTBIT_HOST}...
       - sed -i "s|\${FLUENTBIT_HOST}|$FLUENTBIT_HOST|g" fluent-bit.conf
+      - cat  fluent-bit.conf
       - docker build -t ecs-package-repository:latest -f dockerfile .
       - docker tag ecs-package-repository:latest 785975698029.dkr.ecr.ap-south-1.amazonaws.com/ecs-package-repository:latest      
   post_build:
